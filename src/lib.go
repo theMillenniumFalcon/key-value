@@ -39,14 +39,18 @@ func toRecord(data []byte) Record {
 
 func fromRecord(rec Record) []byte {
 	cc := ""
+
 	if rec.deleted == HARD {
 		panic("Can't put HARD delete in the database")
 	}
+
 	if rec.deleted == SOFT {
 		cc = "DELETED"
 	}
+
 	if len(rec.hash) == 32 {
 		cc += "HASH" + rec.hash
 	}
+
 	return []byte(cc + strings.Join(rec.rVolumes, ","))
 }
