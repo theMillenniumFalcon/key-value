@@ -1,5 +1,5 @@
 # key-value
-a 1000 line non-proxying distributed key value store. Optimized for reading files between 1MB and 10MB.
+a 1000 line non-proxying distributed key value store. Optimized for reading files between 1MB and 1GB.
 
 ### API
 - GET /key
