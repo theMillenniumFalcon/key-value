@@ -23,3 +23,20 @@ type App struct {
 	md5sum     bool
 	volTimeout time.Duration
 }
+
+func (a *App) UnlockKey(key []byte) {
+	a.mlock.Lock()
+	defer a.mlock.Unlock()
+	delete(a.lock, string(key))
+}
+
+func (a *App) LockKey(key []byte) bool {
+	a.mlock.Lock()
+	defer a.mlock.Unlock()
+	if _, prs := a.lock[string(key)]; prs {
+		return false
+	}
+	a.lock[string(key)] = struct{}{}
+
+	return true
+}
